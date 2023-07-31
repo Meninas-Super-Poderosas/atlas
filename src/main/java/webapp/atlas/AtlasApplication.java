@@ -10,4 +10,6 @@ public class AtlasApplication {
 		SpringApplication.run(AtlasApplication.class, args);
 	}
 
+
 }
+
