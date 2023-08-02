@@ -27,6 +27,6 @@ REQ3 - O sistema deve permitir CRUD de staff.
 REQ4 - O sistema deve contar com a manipulação de API.  
 REQ5 - O sistema deve permitir ao usuário a capacidade de filtrar dados específicos.  
 REQ6 - O sistema deve permitir que o usuário consiga acessar seu histórico de pesquisas.  
-REQ7 - O sistema deve permitir que o usuário mude as cores do continente de acordo   
-
-
+REQ7 - O sistema deve permitir que o usuário mude as cores do continente de acordo com a sua preferência   
+REQ8 - O sistema deve possibilitar o usuário comparar diferentes países analisando diferentes critérios
+REQ9 - O sistema deve possuir integração com banco de dados PostgreeSQL
