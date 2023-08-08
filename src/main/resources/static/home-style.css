@@ -13,7 +13,7 @@ body {
     width: 130px;
     background-color: #2B2A4C;
     color: #fff;
-    z-index: 1;
+    z-index: 3;
     align-items: flex-start !important;
 }
 
@@ -27,7 +27,7 @@ body {
 
 }
 
-#logo-do-caralho{
+#logo{
     padding: 10px;
 }
 
@@ -46,6 +46,7 @@ body {
     margin-left: 200px;
     padding: 20px;
     margin-top: 0;
+    z-index: 0;
 }
 
 footer{
@@ -54,6 +55,13 @@ footer{
     padding: 10px;
     background-color: #81d4fa;
     color: #000 ;
-    z-index: 1;
+    z-index: 3;
     left: 45%;
+}
+
+@media (max-width: 600px) {
+    .content{
+        width: 0;
+        height: 0;
+    }
 }
