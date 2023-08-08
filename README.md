@@ -28,7 +28,7 @@ REQ4 - O sistema deve contar com a manipulação de API.
 REQ5 - O sistema deve permitir ao usuário a capacidade de filtrar dados específicos.  
 REQ6 - O sistema deve permitir que o usuário consiga acessar seu histórico de filtros.     
 REQ7 - O sistema deve possibilitar o usuário comparar diferentes países analisando diferentes critérios                                     
-REQ8 - O sistema deve possuir integração com banco de dados PostgresSQL
-REQ9 - O sistema deve possuir votação para eleger país à receber post
-REQ10 - O sistema deve permitir que o usuário comente e dê likes no post 
+REQ8 - O sistema deve possuir integração com banco de dados PostgresSQL  
+REQ9 - O sistema deve possuir votação para eleger país à receber post  
+REQ10 - O sistema deve permitir que o usuário comente e dê likes no post   
 
