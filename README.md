@@ -15,18 +15,20 @@ Possíveis futuras funções do ATLAS:
 
 Visualização de dados e informações essenciais de cada país.  
 Busca de países através de nichos específicos.  
-Verificar a presença ou não de uma característica nos países.  
-O ATLAS poderia, através do login, salvar as últimas pesquisas do usuário facilitando o acesso recorrente.  
-Escolha de paleta de cores do mapa.  
+Filtrar característica nos países.    
+País mais votado receberá post especial. 
+Usuário pode Comentar e dar like no post. 
 
 
 ## Requisitos do projeto
 REQ1 - O sistema deve ter login dedicado a separar staff e usuário.  
 REQ2 - O sistema deve coletar dados através de um API e disponibiliza-los de maneira simples para o usuário.  
-REQ3 - O sistema deve permitir CRUD de staff.  
+REQ3 - O sistema deve permitir CRUD de staff, países, usuários...  
 REQ4 - O sistema deve contar com a manipulação de API.  
 REQ5 - O sistema deve permitir ao usuário a capacidade de filtrar dados específicos.  
-REQ6 - O sistema deve permitir que o usuário consiga acessar seu histórico de pesquisas.  
-REQ7 - O sistema deve permitir que o usuário mude as cores do continente de acordo com a sua preferência   
-REQ8 - O sistema deve possibilitar o usuário comparar diferentes países analisando diferentes critérios                                     
-REQ9 - O sistema deve possuir integração com banco de dados PostgreeSQL
+REQ6 - O sistema deve permitir que o usuário consiga acessar seu histórico de filtros.     
+REQ7 - O sistema deve possibilitar o usuário comparar diferentes países analisando diferentes critérios                                     
+REQ8 - O sistema deve possuir integração com banco de dados PostgresSQL
+REQ9 - O sistema deve possuir votação para eleger país à receber post
+REQ10 - O sistema deve permitir que o usuário comente e dê likes no post 
+
