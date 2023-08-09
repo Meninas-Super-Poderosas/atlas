@@ -26,7 +26,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public Optional<Post> getPostById(@PathVariable Long id){
-        return postService.getPostByID(id);
+        return postService.getPostById(id);
     }
 
     @PutMapping("/{id}")
