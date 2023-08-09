@@ -2,9 +2,6 @@ package webapp.atlas;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name="countries")
 public class Country {
