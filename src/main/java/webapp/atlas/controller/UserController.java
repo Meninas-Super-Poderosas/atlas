@@ -2,8 +2,8 @@ package webapp.atlas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import webapp.atlas.User;
-import webapp.atlas.UserService;
+import webapp.atlas.model.User;
+import webapp.atlas.service.UserService;
 
 import java.util.List;
 import java.util.Optional;

@@ -3,8 +3,8 @@ package webapp.atlas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import webapp.atlas.Country;
-import webapp.atlas.CountryService;
+import webapp.atlas.model.Country;
+import webapp.atlas.service.CountryService;
 
 
 import java.util.List;

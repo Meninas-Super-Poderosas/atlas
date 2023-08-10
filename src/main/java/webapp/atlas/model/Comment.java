@@ -1,6 +1,8 @@
-package webapp.atlas;
+package webapp.atlas.model;
 
 import jakarta.persistence.*;
+import webapp.atlas.model.Post;
+import webapp.atlas.model.User;
 
 
 @Entity

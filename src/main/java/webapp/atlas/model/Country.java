@@ -1,4 +1,4 @@
-package webapp.atlas;
+package webapp.atlas.model;
 
 import jakarta.persistence.*;
 

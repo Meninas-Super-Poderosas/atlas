@@ -2,8 +2,8 @@ package webapp.atlas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import webapp.atlas.CommentService;
-import webapp.atlas.Comment;
+import webapp.atlas.service.CommentService;
+import webapp.atlas.model.Comment;
 import java.util.List;
 import java.util.Optional;
 

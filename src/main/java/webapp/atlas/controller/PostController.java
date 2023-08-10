@@ -2,8 +2,8 @@ package webapp.atlas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import webapp.atlas.Post;
-import webapp.atlas.PostService;
+import webapp.atlas.model.Post;
+import webapp.atlas.service.PostService;
 
 import java.util.List;
 import java.util.Optional;
