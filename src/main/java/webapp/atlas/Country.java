@@ -38,14 +38,14 @@ public class Country {
     public String getFlag(){
         return this.flag;
     }
-    public void setFlag(String name){
+    public void setFlag(String flag){
         this.flag = flag;
     }
     public String getCapital(){
         return this.capital;
     }
     public void setCapital(String capital){
-        this.name = capital;
+        this.capital = capital;
     }
     public String getLanguages(){
         return this.languages;
