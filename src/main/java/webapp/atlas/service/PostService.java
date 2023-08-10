@@ -1,7 +1,9 @@
-package webapp.atlas;
+package webapp.atlas.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import webapp.atlas.PostRepository;
+import webapp.atlas.model.Post;
 
 import java.util.List;
 import java.util.Optional;

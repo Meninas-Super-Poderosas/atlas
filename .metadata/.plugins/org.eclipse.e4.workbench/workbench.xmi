@@ -1878,7 +1878,7 @@
   <commands xmi:id="_ga02LSyxEe6lX-y09zpAQA" elementId="org.eclipse.tm4e.languageconfiguration.removeBlockCommentCommand" commandName="Remove Block Comment" category="_gap20iyxEe6lX-y09zpAQA"/>
   <commands xmi:id="_ga02LiyxEe6lX-y09zpAQA" elementId="org.eclipse.egit.ui.team.PushTags" commandName="Push Tags..." category="_gaqd6CyxEe6lX-y09zpAQA"/>
   <commands xmi:id="_ga02LyyxEe6lX-y09zpAQA" elementId="org.eclipse.egit.ui.ContinueRebase" commandName="Continue Rebase" category="_gaqd6CyxEe6lX-y09zpAQA"/>
-  <commands xmi:id="_ga02MCyxEe6lX-y09zpAQA" elementId="org.eclipse.help.ui.closeTray" commandName="Close webapp.atlas.User Assistance Tray" description="Close the user assistance tray containing context help information and cheat sheets." category="_gaqd4SyxEe6lX-y09zpAQA"/>
+  <commands xmi:id="_ga02MCyxEe6lX-y09zpAQA" elementId="org.eclipse.help.ui.closeTray" commandName="Close webapp.atlas.model.User Assistance Tray" description="Close the user assistance tray containing context help information and cheat sheets." category="_gaqd4SyxEe6lX-y09zpAQA"/>
   <commands xmi:id="_ga02MSyxEe6lX-y09zpAQA" elementId="org.eclipse.egit.ui.history.CreatePatch" commandName="Create Patch..." category="_gaqd7iyxEe6lX-y09zpAQA"/>
   <commands xmi:id="_ga1dACyxEe6lX-y09zpAQA" elementId="org.eclipse.debug.ui.commands.Resume" commandName="Resume" description="Resume" category="_gaqd5SyxEe6lX-y09zpAQA"/>
   <commands xmi:id="_ga1dASyxEe6lX-y09zpAQA" elementId="org.eclipse.mylyn.context.ui.commands.open.context.dialog" commandName="Show Context Quick View" description="Show Context Quick View" category="_gap22yyxEe6lX-y09zpAQA"/>
