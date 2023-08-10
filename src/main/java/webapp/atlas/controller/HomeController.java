@@ -12,10 +12,15 @@ import java.util.List;
 public class HomeController {
 
 
+
+
     @GetMapping("/")
     public String main(Model model) {
         return "home"; //view
     }
+
+    @GetMapping("/post")
+    public String post(Model model){ return "post";}
 
 
 }
