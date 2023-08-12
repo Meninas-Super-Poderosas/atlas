@@ -27,6 +27,7 @@ public class CountryService {
     }
 
     public Country updateCountry(long id, Country country){
+        countryRepository.deleteById(id);
         country.setName(country.getName());
         country.setLanguages(country.getLanguages());
         country.setCapital(country.getCapital());

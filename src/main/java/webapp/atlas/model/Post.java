@@ -66,4 +66,12 @@ public class Post {
     public void setLikes(int likes) {
         this.likes = likes;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

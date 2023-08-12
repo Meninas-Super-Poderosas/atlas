@@ -53,4 +53,12 @@ public class Country {
     public void setLanguages(String languages){
         this.languages = languages;
     }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }

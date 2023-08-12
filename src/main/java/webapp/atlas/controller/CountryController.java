@@ -24,7 +24,7 @@ public class CountryController {
     // Delete country by name
     @DeleteMapping("/{id}")
     public void deleteCountry(@PathVariable Long id) {
-        countryService.deleteCountry(id);
+        countryService. deleteCountry(id);
     }
 
     @GetMapping
