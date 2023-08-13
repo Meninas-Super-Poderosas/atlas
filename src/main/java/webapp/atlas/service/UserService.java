@@ -1,5 +1,6 @@
 package webapp.atlas.service;
 
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webapp.atlas.repository.UserRepository;
@@ -30,7 +31,7 @@ public class UserService {
     }
 
     // Update user
-    public User updateUser(Long id, User userDetails) {
+    public User updateUser(@NonNull Long id, User userDetails) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();
@@ -49,7 +50,7 @@ public class UserService {
     }
 
     // Delete user
-    public void deleteUser(Long id) {
+    public void deleteUser(@NonNull Long id) {
         userRepository.deleteById(id);
     }
 
