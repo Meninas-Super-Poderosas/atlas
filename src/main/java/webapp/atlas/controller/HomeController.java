@@ -22,5 +22,13 @@ public class HomeController {
     @GetMapping("/post")
     public String post(Model model){ return "post";}
 
+    @GetMapping("/filter")
+    public String filter(Model model){ return "filter";}
+
+    @GetMapping("/tutorial")
+    public String tutorial(Model model){ return "tutorial";}
+
+    @GetMapping("/login")
+    public String login(Model model){ return "login";}
 
 }
