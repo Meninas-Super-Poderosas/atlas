@@ -1,11 +1,12 @@
 package webapp.atlas.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 
 @Entity
 @Table(name="posts")
-public class Post {
+public @Data class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,51 +28,5 @@ public class Post {
     private int likes;
 
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

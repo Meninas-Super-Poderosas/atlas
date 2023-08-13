@@ -1,10 +1,11 @@
 package webapp.atlas.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name="countries")
-public class Country {
+public @Data class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -17,48 +18,5 @@ public class Country {
     private String capital;
     private String languages;
 
-    public String getName(){
-        return this.name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-    public int getPopulation(){
-        return this.population;
-    }
-    public void setPopulation(int population){
-        this.population = population;
-    }
-    public String getCurrencies(){
-        return this.currencies;
-    }
-    public void setCurrencies(String currencies){
-        this.currencies = currencies;
-    }
-    public String getFlag(){
-        return this.flag;
-    }
-    public void setFlag(String flag){
-        this.flag = flag;
-    }
-    public String getCapital(){
-        return this.capital;
-    }
-    public void setCapital(String capital){
-        this.capital = capital;
-    }
-    public String getLanguages(){
-        return this.languages;
-    }
-    public void setLanguages(String languages){
-        this.languages = languages;
-    }
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
 }
