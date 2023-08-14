@@ -1,6 +1,10 @@
 package webapp.atlas.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import webapp.atlas.model.Country;
@@ -8,6 +12,8 @@ import webapp.atlas.service.CountryService;
 
 
 import java.util.List;
+
+import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
 @RestController
 @RequestMapping("/countries")
@@ -17,21 +23,29 @@ public class CountryController {
     private CountryService countryService;
 
     @PostMapping
+    @Operation(summary = "Create Country", description = "Accepts request/JSON. Add a new country and store it in the database.")
     public Country createCountry(@RequestBody Country country) {
         return countryService.createCountry(country);
     }
 
     // Delete country by name
     @DeleteMapping("/{id}")
+    @Operation(summary = "Specify one country and then delete it")
+    @Parameter(name = "id", required = true, description = "ID of the country that will be deleted.")
+    @Schema(accessMode = READ_ONLY)
     public void deleteCountry(@PathVariable Long id) {
         countryService.deleteCountry(id);
     }
 
+
     @GetMapping
+    @Operation(summary = "Get all countries.", description = "returns JSON with all countries.")
     public List<Country> getAllCountries() {
         return countryService.getAllCountries();
     }
 
+    @Operation(summary = "Update Country", description = "Accepts request/JSON. Add a new country and store it in the database.")
+    @Parameter(name = "id", required = true, description = "Id of the country that will be updated")
     @PutMapping("/{id}")
     public Country updateCountry(@PathVariable Long id, @RequestBody Country country){
         return countryService.updateCountry(id, country);
