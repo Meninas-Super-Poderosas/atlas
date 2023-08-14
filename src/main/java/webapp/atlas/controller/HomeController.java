@@ -1,4 +1,6 @@
 package webapp.atlas.controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,23 +14,34 @@ import java.util.List;
 public class HomeController {
 
 
-
-
     @GetMapping("/")
-    public String main(Model model) {
+    @Operation(summary = "Home Page", description = "Returns the home view.")
+    public String home(Model model) {
         return "home"; //view
     }
 
     @GetMapping("/post")
-    public String post(Model model){ return "post";}
+    @Operation(summary = "Post Page", description = "Returns the ListPosts view.")
+    public String post(Model model) {
+        return "post";
+    }
 
     @GetMapping("/filter")
-    public String filter(Model model){ return "filter";}
+    @Operation(summary = "Filter Page", description = "Returns the filter view.")
+    public String filter(Model model) {
+        return "filter";
+    }
 
     @GetMapping("/tutorial")
-    public String tutorial(Model model){ return "tutorial";}
+    @Operation(summary = "Tutorial Page", description = "Returns the tutorial view.")
+    public String tutorial(Model model) {
+        return "tutorial";
+    }
 
     @GetMapping("/login")
-    public String login(Model model){ return "login";}
+    @Operation(summary = "Login Page", description = "Returns the login page.")
+    public String login(Model model) {
+        return "login";
+    }
 
 }
