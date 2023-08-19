@@ -3,7 +3,7 @@ package webapp.atlas.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
-
+import java.util.Set;
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
 @Entity
@@ -13,6 +13,11 @@ public @Data class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Country ID", accessMode = READ_ONLY)
     private long id;
+
+    //Referenciar post
+    @OneToMany(mappedBy = "country")
+    private Set<Post> posts;
+
 
     @Schema(description = "Country name", type = "String")
     private String name;

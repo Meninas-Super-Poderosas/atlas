@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
 
@@ -22,12 +24,13 @@ public @Data class Post {
     @Schema(description = "Country id")
     private Country country;
 
-    //Referenciar user
     @ManyToOne
-    @JoinColumn(name= "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @Schema(description = "User id")
     private User user;
 
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments;
 
     @Schema(description = "Post's title", nullable = true, type = "String")
     private String title;

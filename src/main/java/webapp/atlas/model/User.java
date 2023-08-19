@@ -40,4 +40,10 @@ public @Data @NonNull class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Post> posts;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments;
 }
