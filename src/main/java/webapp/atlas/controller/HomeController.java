@@ -44,4 +44,8 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/dashboard")
+    public String adminDashboard(Model model) {
+        return "dashboard-admin";
+    }
 }
