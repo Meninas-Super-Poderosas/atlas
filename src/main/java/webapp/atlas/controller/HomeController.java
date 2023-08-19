@@ -44,8 +44,17 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/admin/dashboard")
     public String adminDashboard(Model model) {
         return "dashboard-admin";
+    }
+    @GetMapping("/admin/users")
+    public String listUsers(Model model) {
+        return "list-users";
+    }
+
+    @GetMapping("/admin/users/create")
+    public String createUsers(Model model) {
+        return "create-user";
     }
 }
