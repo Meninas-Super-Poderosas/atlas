@@ -59,42 +59,54 @@ public class CountryController {
         return countryService.updateCountry(id, country);
     }
 
+    private List<String> getAllCountryNames() {
+        List<String> countryNames = Arrays.asList(
+                "Afghanistan", "Albania", "Algeria",
+                "Zimbabwe"
+        );
+        return countryNames;
+    }
+
     @PostMapping("/create-all-countries")
     public List<Country> createAllcountries() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
-                "https://restcountries.com/v3.1/name/Brazil?fields=name,flags,capital,population,currencies,languages",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Map<String, Object>>>() {}
-        );
-        List<Map<String, Object>> countryDataList = response.getBody();
-
+        List<String> countryNames = getAllCountryNames(); // You need to implement this method
         List<Country> createdCountries = new ArrayList<>();
 
-        assert countryDataList != null;
-        for (Map<String, Object> countryData : countryDataList) {
-            Map<String, Object> flags = (Map<String, Object>) countryData.get("flags");
-            String flagUrl = (String) flags.get("png");
+        for (String countryName : countryNames) {
+            ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
+                    "https://restcountries.com/v3.1/name/" + countryName + "?fields=name,flags,capital,population,currencies,languages",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<Map<String, Object>>>() {}
+            );
 
-            String name = (String) ((Map<String, Object>) countryData.get("name")).get("common");
-            Long population = Long.valueOf((Integer) countryData.get("population"));
-            String currency = (String) ((Map<String, Object>) ((Map<String, Object>) countryData.get("currencies")).values().iterator().next()).get("name");
-            String language = (String) ((Map<String, Object>) countryData.get("languages")).values().iterator().next();
-            String capital = ((List<String>) countryData.get("capital")).get(0);
+            List<Map<String, Object>> countryDataList = response.getBody();
+            if (countryDataList != null && !countryDataList.isEmpty()) {
+                Map<String, Object> countryData = countryDataList.get(0);
+                Map<String, Object> flags = (Map<String, Object>) countryData.get("flags");
+                String flagUrl = (String) flags.get("png");
 
-            Country country = new Country();
-            country.setName(name);
-            country.setPopulation(population);
-            country.setCurrencies(currency);
-            country.setLanguages(language);
-            country.setCapital(capital);
-            country.setFlag(flagUrl);
+                String name = (String) ((Map<String, Object>) countryData.get("name")).get("common");
+                Long population = Long.valueOf((Integer) countryData.get("population"));
+                String currency = (String) ((Map<String, Object>) ((Map<String, Object>) countryData.get("currencies")).values().iterator().next()).get("name");
+                String language = (String) ((Map<String, Object>) countryData.get("languages")).values().iterator().next();
+                String capital = ((List<String>) countryData.get("capital")).get(0);
 
-            createdCountries.add(countryService.createCountry(country));
+                Country country = new Country();
+                country.setName(name);
+                country.setPopulation(population);
+                country.setCurrencies(currency);
+                country.setLanguages(language);
+                country.setCapital(capital);
+                country.setFlag(flagUrl);
 
+                createdCountries.add(countryService.createCountry(country));
+            }
         }
 
         return createdCountries;
     }
+
+
 }
