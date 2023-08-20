@@ -57,4 +57,17 @@ public class HomeController {
     public String createUsers(Model model) {
         return "create-user";
     }
+
+    @GetMapping("/admin/posts")
+    public String listPosts(Model model){ return "list-posts";}
+
+    @GetMapping("/admin/posts/create")
+    public String createPosts(Model model){ return "create-post";}
+
+    @GetMapping("/admin/filters")
+    public String listFilters(Model model){ return "list-filter";}
+
+    @GetMapping("/admin/roles")
+    public String listRoles(Model model){ return "list-role";}
+
 }
