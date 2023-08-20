@@ -19,10 +19,10 @@ public @Data class Post {
     private long id;
 
     //Referenciar pais
-    @ManyToOne
-    @JoinColumn(name= "country_id")
-    @Schema(description = "Country id")
-    private Country country;
+//    @ManyToOne
+//    @JoinColumn(name= "country_id")
+//    @Schema(description = "Country id")
+//    private Country country;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
