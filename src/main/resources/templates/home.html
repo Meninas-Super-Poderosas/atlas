@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
   <meta charset="UTF-8">
   <title>Atlas</title>
@@ -29,68 +29,100 @@
 <script type="text/javascript">
   google.charts.load('current', {
     callback: function () {
-      var data = google.visualization.arrayToDataTable([
-        ['Country', 'Popularity', 'Domain', 'Tooltip'], // Add 'Tooltip' column
-        ['England', 400, 'www.example.com/England', '<div><img src="england.jpg" alt="England" width="100"><br>England</div>'],
-        ['Wales', 300, 'www.example.com/Wales', '<div><img src="wales.jpg" alt="Wales" width="100"><br>Wales</div>'],
-        ['Scotland', 400, 'www.example.com/Scotland', '<div><img src="scotland.jpg" alt="Scotland" width="100"><br>Scotland</div>'],
-        ['Ireland', 600, 'www.example.com/Ireland', '<div><img src="ireland.jpg" alt="Ireland" width="100"><br>Ireland</div>'],
-        ['Brazil', 400, 'www.example.com/Brazil', '<div><img src="brazil.jpg" alt="Brazil" width="100"><br>Brazil</div>'],
-      ]);
+      fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,population,currencies,languages,continents')
+              .then(response => response.json())
+              .then(data => {
+                var dataArray = [];
+                dataArray.push(['Country', 'Value', {role: 'tooltip', p:{html:true}}])
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1]);
+                data.forEach(country => {
+                  var flagUrl = country.flags.png;
+                  var officialName = country.name.official;
+                  var commonName = country.name.common;
 
-      var selectedCountry = null; // Variable to store the currently selected country
+                  var population = country.population;
+                  var capital = country.capital[0];
+                  var languages = Object.values(country.languages).join(', ');
+                  var currencies = Object.keys(country.currencies).join(', ');
 
-      var options = {
-        region: 'world',
-        colorAxis: { colors: ['blue', 'green', 'yellow'] },
-        backgroundColor: '#81d4fa',
-        datalessRegionColor: 'white',
-        defaultColor: '#f5f5f5',
-        enableRegionInteractivity: true,
-        tooltip: {
-          isHtml: true,
-          textStyle: { fontSize: 20, color: 'black', fontName: 'Arial' }, // Change font properties
-          trigger: 'focus', // Use 'focus' for hover effect, 'none' for always visible
-          backgroundColor: 'green', // Change background color
-          opacity: 0.9, // Change tooltip opacity
-          borderColor: 'crimson', // Change border color
-          borderRadius: 8, // Change border radius
-          showColorCode: true, // Show color code in tooltip
-          showTitle: true, // Show tooltip title
-          titleTextStyle: { fontSize: 16, color: 'blue', fontName: 'Arial' }, // Change title font properties
-        },
-      };
+                  dataArray.push(["Czech Republic", 200, '<img width="75%" height="75%" src="' + "https://flagcdn.com/w320/cz.png" + '" alt="Flag of ' + "Czech Republic" + '">' +
+                  '<p>Official Name: ' + "Czech Republic" + '</p>' +
+                  '<p>Population: ' + 10698896 + '</p>' +
+                  '<p>Capital: ' + "Prague" + '</p>' +
+                  '<p>Languages: ' + "Czech, Slovak" + '</p>' +
+                  '<p>Currencies: ' + "CZK" + '</p>']);
+
+                  dataArray.push(["MK", 200, '<img width="75%" height="75%" src="' + "https://flagcdn.com/w320/cz.png" + '" alt="Flag of ' + "Republic of North Macedonia" + '">' +
+                  '<p>Official Name: ' + "Republic of North Macedonia" + '</p>' +
+                  '<p>Population: ' + 2077132 + '</p>' +
+                  '<p>Capital: ' + "Skopje" + '</p>' +
+                  '<p>Languages: ' + "Macedonian" + '</p>' +
+                  '<p>Currencies: ' + "MKD" + '</p>']);
 
 
-      var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-      function resizeChart() {
-        chart.draw(view, options);
-      }
 
-      google.visualization.events.addListener(chart, 'regionClick', function (eventData) {
-        var clickedRegion = eventData.region;
+                  var tooltipContent = '<img width="75%" height="75%" src="' + flagUrl + '" alt="Flag of ' + officialName + '">' +
+                          '<p>Official Name: ' + officialName + '</p>' +
+                          '<p>Population: ' + population + '</p>' +
+                          '<p>Capital: ' + capital + '</p>' +
+                          '<p>Languages: ' + languages + '</p>' +
+                          '<p>Currencies: ' + currencies + '</p>';
 
-        if (selectedCountry === clickedRegion) {
-          selectedCountry = null;
-          options.region = 'world';
-        } else {
-          selectedCountry = clickedRegion;
-          options.region = clickedRegion;
-        }
-        resizeChart();
-      });
+                  dataArray.push([commonName, 200, tooltipContent]);
+                });
 
-      if (window.addEventListener) {
-        window.addEventListener('resize', resizeChart);
-      } else if (window.attachEvent) {
-        window.attachEvent('onresize', resizeChart);
-      }
+                var data = google.visualization.arrayToDataTable(dataArray);
+                var view = new google.visualization.DataView(data);
 
-      resizeChart();
+                var selectedCountry = null;
+                var options = {
+                  region: 'world',
+                  colorAxis: { colors: ['blue', '#318f34'] },
+                  backgroundColor: '#81d4fa',
+                  datalessRegionColor: 'white',
+                  defaultColor: '#f5f5f5',
+                  enableRegionInteractivity: true,
+                  tooltip: {
+                    isHtml: true,
+                    textStyle: { fontSize: 15, color: 'black', fontName: 'Arial' },
+                    trigger: 'focus',
+                    opacity: 0.9,
+                    borderColor: 'crimson',
+                    borderRadius: 5,
+                    showColorCode: false,
+                    showTitle: true,
+                    titleTextStyle: { fontSize: 16, color: 'blue', fontName: 'Arial' },
+                  },
+                };
+
+                var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+                function resizeChart() {
+                  chart.draw(view, options);
+                }
+
+                google.visualization.events.addListener(chart, 'regionClick', function (eventData) {
+                  var clickedRegion = eventData.region;
+
+                  if (selectedCountry === clickedRegion) {
+                    selectedCountry = null;
+                    options.region = 'world';
+                  } else {
+                    selectedCountry = clickedRegion;
+                    options.region = clickedRegion;
+                  }
+                  resizeChart();
+                });
+
+                if (window.addEventListener) {
+                  window.addEventListener('resize', resizeChart);
+                } else if (window.attachEvent) {
+                  window.attachEvent('onresize', resizeChart);
+                }
+
+                resizeChart();
+              });
     },
     packages: ['geochart']
   });
