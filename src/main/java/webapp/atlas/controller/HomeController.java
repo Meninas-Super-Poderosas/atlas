@@ -26,7 +26,7 @@ public class HomeController {
         return "post";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/dashfilter")
     @Operation(summary = "Filter Page", description = "Returns the filter view.")
     public String filter(Model model) {
         return "filter";

@@ -27,7 +27,9 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize
                                 .requestMatchers("/countries/create-all-countries").permitAll()
+                                .requestMatchers("/").permitAll()
                                 .requestMatchers("/countries").permitAll()
+
                                 .requestMatchers("/countries/create-all-countries2").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
