@@ -1,10 +1,40 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Raleway', Arial, sans-serif;
+    background-color: white;
+    overflow: hidden;
+}
+
+/* Top Navbar Styles */
+.topnavbar {
+    background-color: #0f090c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.post{
+    margin-top: 10%;
+    display: inline-flex;
+}
+
 .snip1143 {
     font-family: 'Raleway', Arial, sans-serif;
     text-align: center;
     text-transform: uppercase;
     font-weight: 500;
 }
+
 .snip1143 * {
     box-sizing: border-box;
     -webkit-transition: all 0.35s ease;
@@ -16,6 +46,9 @@
     margin: 0 1.5em;
     overflow: hidden;
 }
+
+
+
 .snip1143 a {
     padding: 0.3em 0;
     color: rgba(255, 255, 255, 0.5);
@@ -37,7 +70,7 @@
     height: 3px;
     width: 100%;
     content: "";
-    background-color: #c0392b;
+    background-color: #9500f8;
 }
 .snip1143 a:after {
     padding: 0.3em 0;
@@ -52,26 +85,54 @@
 .snip1143 .current a {
     transform: translateY(-100%);
 }
-/* Demo purposes only */
-body {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #212121;
+/* ATLAS Container Styles */
+.ATLAS {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-
-/* Demo purposes only */
-html {
+.content {
+    position: absolute;
+    width: 100%;
     height: 100%;
+    z-index: 1;
 }
-body {
-    background-color: #212121;
+
+#regions_div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Footer Styles */
+#footer {
+    position: sticky;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-flow: wrap;
-    margin: 0;
-    height: 100%;
+    bottom: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .topnavbar {
+        padding: 5px;
+    }
+    .snip1143 li {
+        /*display: inline-flexbox;*/
+        display: inline-flex;
+        margin: 10px 10px;
+    }
+    #footer {
+        position: static;
+        text-align: center;
+        margin-top: 10px;
+    }
+    /*#belt{*/
+    /*    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTErpoA9KFzQge5TOiUnagP4SNc_zLxAPQyCYnovF74ZP5nFLTjqdZ6HxcR&s=10";*/
+    /*}*/
 }

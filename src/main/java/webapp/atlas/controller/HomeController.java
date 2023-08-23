@@ -32,11 +32,11 @@ public class HomeController {
         return "filter";
     }
 
-    @GetMapping("/tutorial")
-    @Operation(summary = "Tutorial Page", description = "Returns the tutorial view.")
-    public String tutorial(Model model) {
-        return "tutorial";
-    }
+//    @GetMapping("/tutorial")
+//    @Operation(summary = "Tutorial Page", description = "Returns the tutorial view.")
+//    public String tutorial(Model model) {
+//        return "tutorial";
+//    }
 
     @GetMapping("/login")
     @Operation(summary = "Login Page", description = "Returns the login page.")
@@ -48,15 +48,15 @@ public class HomeController {
     public String adminDashboard(Model model) {
         return "dashboard-admin";
     }
-    @GetMapping("/admin/users")
-    public String listUsers(Model model) {
-        return "list-users";
-    }
-
-    @GetMapping("/admin/users/create")
-    public String createUsers(Model model) {
-        return "create-user";
-    }
+//    @GetMapping("/admin/users")
+//    public String listUsers(Model model) {
+//        return "list-users";
+//    }
+//
+//    @GetMapping("/admin/users/create")
+//    public String createUsers(Model model) {
+//        return "create-user";
+//    }
 
     @GetMapping("/admin/posts")
     public String listPosts(Model model){ return "list-posts";}
@@ -69,5 +69,6 @@ public class HomeController {
 
     @GetMapping("/admin/roles")
     public String listRoles(Model model){ return "list-role";}
+
 
 }
