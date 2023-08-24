@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
-<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
+<html lang="en" dir="ltr"       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Atlas</title>
@@ -15,6 +15,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bx-world'></i>
+
         <span class="logo_name">Atlas</span>
     </div>
     <ul class="nav-links">
@@ -68,20 +69,20 @@
             <div class="recent-sales box">
                 <div class="title">Create a new User</div>
                 <div class="sales-details">
-                     <form action="/users">
+                     <form role="form"
+                           th:action="@{/users/create-user}" th:object="${user}" method="post">
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input type="text" th:field="*{user.email}" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
+                            <input type="text" class="form-control" id="username" name="name" aria-describedby="emailHelp" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
