@@ -1,12 +1,14 @@
 package webapp.atlas.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
 
 import java.util.Set;
 
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
+@XmlRootElement
 @Entity
 @Setter
 @Getter

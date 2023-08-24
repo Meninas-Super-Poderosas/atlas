@@ -1,16 +1,21 @@
 package webapp.atlas.controller;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import webapp.atlas.model.User;
 import webapp.atlas.service.UserService;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
     @Autowired
@@ -62,4 +67,20 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
+
+    @GetMapping("/create-user")
+    public String userForm(Model model) {
+        model.addAttribute("user", new User());
+        return "create-user";
+    }
+
+    @PostMapping("/create-user")
+    public String userSubmit(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
+        userService.createUser(user);
+
+        //return userService.createUser("result");
+        return "list-users";
+    }
+
 }
