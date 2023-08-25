@@ -22,11 +22,11 @@
   </div>
   <div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-primary" id="filterSouthAmerica">South America</button>
-    <button type="button" class="btn btn-primary">North America</button>
-    <button type="button" class="btn btn-primary">Europe</button>
-    <button type="button" class="btn btn-primary">Asia</button>
-    <button type="button" class="btn btn-primary">Oceania</button>
-    <button type="button" class="btn btn-primary">Africa</button>
+    <button type="button" class="btn btn-primary" id="filterNorthAmerica">North America</button>
+    <button type="button" class="btn btn-primary" id="filterEurope">Europe</button>
+    <button type="button" class="btn btn-primary" id="filterAsia">Asia</button>
+    <button type="button" class="btn btn-primary" id="filterOceania">Oceania</button>
+    <button type="button" class="btn btn-primary" id="filterAfrica">Africa</button>
 
   </div>
 </div>
@@ -63,19 +63,46 @@
                 data.push(JSON.parse('{"flags":{"png":"https://flagcdn.com/w320/re.png","svg":"https://flagcdn.com/re.svg","alt":""},"name":{"common":"RE","official":"Réunion Island","nativeName":{"fra":{"official":"Ile de la Réunion","common":"RE"}}},"currencies":{"EUR":{"name":"Euro","symbol":"€"}},"capital":["Saint-Denis"],"languages":{"fra":"French"},"population":840974,"continents":["Africa"]}'))
 
                 // geoCharts array used to display the countries, used in google.visualization.arrayToDataTable(dataArray)
-                var dataArray = [];
+                let dataArray = [];
+                dataArray.push(['Country', 'Value', { role: 'tooltip', p: { html: true } }]);
 
-                //This is the first line of dataArray, it specifies the columns and set the last one to accept html as a string.
-                dataArray.push(['Country', 'Value', {role: 'tooltip', p:{html:true}}])
-
-                //loops through each country in the json response and adds them to the dataArray to be displayed.
+                let selectedContinent = null;
+                let view = null; // Declare the view variable
                 data.forEach(country => {
+                  let flagUrl = country.flags.png;
+                  let officialName = country.name.official;
+                  let commonName = country.name.common;
+                  let population = country.population;
+                  let continents = country.continents;
+                  let capital = country.capital[0];
+                  let languages = Object.values(country.languages).join(', ');
+                  let currencies = Object.keys(country.currencies).join(', ');
+
+                  let tooltipContent = '<img width="75%" height="75%" src="' + flagUrl + '" alt="Flag of ' + officialName + '">' +
+                          '<p>Official Name: ' + officialName + '</p>' +
+                          '<p>Population: ' + population + '</p>' +
+                          '<p>Capital: ' + capital + '</p>' +
+                          '<p>Languages: ' + languages + '</p>' +
+                          '<p>Currencies: ' + currencies + '</p>' +
+                          '<p>Continent: ' + continents + '</p>';
+
+                  dataArray.push([commonName, 0, tooltipContent]);
+                  let viewInitialData = google.visualization.arrayToDataTable(dataArray);
+                  view = new google.visualization.DataView(viewInitialData);
+                });
+
+
+                function applyFilters() {
+                  //This is the first line of dataArray, it specifies the columns and set the last one to accept html as a string.
+                  dataArray.length = 0;
+                  dataArray.push(['Country', 'Value', { role: 'tooltip', p: { html: true } }]);
+
+                  data.forEach(country => {
                     let flagUrl = country.flags.png;
                     let officialName = country.name.official;
                     let commonName = country.name.common;
                     let population = country.population;
                     let continents = country.continents;
-
 
                     // Capital needs to be capital[0] because it's a list and some countries have multiple capitals,
                     // a good example is Bolivia, which has La Paz and Sucre as capitals
@@ -90,28 +117,55 @@
                     let currencies = Object.keys(country.currencies).join(', ');
 
 
-                  //this is the tooltip you see at the first row of dataArray, we are passing the
-                  let tooltipContent = '<img width="75%" height="75%" src="' + flagUrl + '" alt="Flag of ' + officialName + '">' +
-                          '<p>Official Name: ' + officialName + '</p>' +
-                          '<p>Population: ' + population + '</p>' +
-                          '<p>Capital: ' + capital + '</p>' +
-                          '<p>Languages: ' + languages + '</p>' +
-                          '<p>Currencies: ' + currencies + '</p>' +
-                          '<p>Continent: ' + continents + '</p>';
+                    //this is the tooltip you see at the first row of dataArray, we are passing the
+                    let tooltipContent = '<img width="75%" height="75%" src="' + flagUrl + '" alt="Flag of ' + officialName + '">' +
+                            '<p>Official Name: ' + officialName + '</p>' +
+                            '<p>Population: ' + population + '</p>' +
+                            '<p>Capital: ' + capital + '</p>' +
+                            '<p>Languages: ' + languages + '</p>' +
+                            '<p>Currencies: ' + currencies + '</p>' +
+                            '<p>Continent: ' + continents + '</p>';
+
+                    let value = 0;
+                    if (!selectedContinent || continents.includes(selectedContinent)) {
+                      value = 200;
+                    }
+                    dataArray.push([commonName, value, tooltipContent]);
 
 
-                  //ToDO: create filters dynamically
-                  if ( continents[0] === "South America") {
-                    dataArray.push([commonName, 200, tooltipContent]);
-                  } else {
-                    dataArray.push([commonName, 0, tooltipContent]);
-                  }
+                  });
+                  //Creates the table with dataArray, and set the view
+                  let viewData = google.visualization.arrayToDataTable(dataArray);
+                  view = new google.visualization.DataView(viewData);
 
+                  resizeChart()
+                }
+
+                document.getElementById('filterSouthAmerica').addEventListener('click', function () {
+                  selectedContinent = 'South America';
+                  applyFilters();
+                });
+                document.getElementById('filterNorthAmerica').addEventListener('click', function () {
+                  selectedContinent = 'North America';
+                  applyFilters();
+                });
+                document.getElementById('filterEurope').addEventListener('click', function () {
+                  selectedContinent = 'Europe';
+                  applyFilters();
+                });
+                document.getElementById('filterAsia').addEventListener('click', function () {
+                  selectedContinent = 'Asia';
+                  applyFilters();
+                });
+                document.getElementById('filterAfrica').addEventListener('click', function () {
+                  selectedContinent = 'Africa';
+                  applyFilters();
+                });document.getElementById('filterOceania').addEventListener('click', function () {
+                  selectedContinent = 'Oceania';
+                  applyFilters();
                 });
 
-                //Creates the table with dataArray, and set the view
-                let viewData = google.visualization.arrayToDataTable(dataArray);
-                let view = new google.visualization.DataView(viewData);
+
 
                 //Map customization
                 let selectedCountry = null;
