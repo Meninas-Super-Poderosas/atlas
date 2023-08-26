@@ -26,11 +26,6 @@ public class HomeController {
         return "post";
     }
 
-    @GetMapping("/dashfilter")
-    @Operation(summary = "Filter Page", description = "Returns the filter view.")
-    public String filter(Model model) {
-        return "filter";
-    }
 
 //    @GetMapping("/tutorial")
 //    @Operation(summary = "Tutorial Page", description = "Returns the tutorial view.")
@@ -69,6 +64,9 @@ public class HomeController {
 
     @GetMapping("/admin/roles")
     public String listRoles(Model model){ return "list-role";}
+
+    @GetMapping("/sign-up")
+    public String signup(Model model){ return "sign-up";}
 
 
 }
