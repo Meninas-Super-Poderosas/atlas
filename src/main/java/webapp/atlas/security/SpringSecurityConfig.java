@@ -28,6 +28,8 @@ public class SpringSecurityConfig {
                         authorize
                                 .requestMatchers("/countries/create-all-countries").permitAll()
                                 .requestMatchers("/countries").permitAll()
+                                .requestMatchers("/sign-up-style").permitAll()
+                                .requestMatchers("/sign-up").permitAll()
                                 .requestMatchers("/countries/create-all-countries2").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
