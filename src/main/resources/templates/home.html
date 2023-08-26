@@ -27,11 +27,11 @@
         LANGUAGES
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">English</a>
-        <a class="dropdown-item" href="#">Portuguese</a>
-        <a class="dropdown-item" href="#">French</a>
-        <a class="dropdown-item" href="#">Arabic</a>
-        <a class="dropdown-item" href="#">Spanish</a>
+        <a class="dropdown-item" id="filterEnglish" href="#">English</a>
+        <a class="dropdown-item" id="filterPortuguese" href="#">Portuguese</a>
+        <a class="dropdown-item" id="filterFrench" href="#">French</a>
+        <a class="dropdown-item" id="filterArabic" href="#">Arabic</a>
+        <a class="dropdown-item" id="filterSpanish" href="#">Spanish</a>
       </div>
     </div>
     <div class="btn-group">
@@ -39,10 +39,10 @@
         POPULATION
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Over 10M</a>
-        <a class="dropdown-item" href="#">Over 50M</a>
-        <a class="dropdown-item" href="#">Over 100M</a>
-        <a class="dropdown-item" href="#">Over 500M</a>
+        <a class="dropdown-item" id="filterOver10M" href="#">Over 10M</a>
+        <a class="dropdown-item" id="filterOver50M" href="#">Over 50M</a>
+        <a class="dropdown-item" id="filterOver100M" href="#">Over 100M</a>
+        <a class="dropdown-item" id="filterOver200M" href="#">Over 200M</a>
       </div>
     </div>
     <div class="btn-group">
@@ -97,7 +97,12 @@
                 let dataArray = [];
                 dataArray.push(['Country', 'Value', { role: 'tooltip', p: { html: true } }]);
 
+                // Filter variables
                 let selectedContinent = null;
+                let selectedLanguage = null;
+                let selectedPopulation = null;
+
+
                 let view = null; // Declare the view variable
                 data.forEach(country => {
                   let flagUrl = country.flags.png;
@@ -123,7 +128,7 @@
                 });
 
 
-                function applyFilters() {
+                function applyFilters(type) {
                   //This is the first line of dataArray, it specifies the columns and set the last one to accept html as a string.
                   dataArray.length = 0;
                   dataArray.push(['Country', 'Value', { role: 'tooltip', p: { html: true } }]);
@@ -158,9 +163,20 @@
                             '<p>Continent: ' + continents + '</p>';
 
                     let value = 0;
-                    if (!selectedContinent || continents.includes(selectedContinent)) {
-                      value = 200;
+                    if (type === "Continent"){
+                      if (!selectedContinent || continents.includes(selectedContinent)) {
+                        value = 200;
+                      }
+                    }else if (type === "Language") {
+                      if (!selectedLanguage || languages.includes(selectedLanguage)) {
+                        value = 200;
+                      }
+                    } else if (type === "Population") {
+                      if (!selectedPopulation || population > selectedPopulation) {
+                        value = 200;
+                      }
                     }
+
                     dataArray.push([commonName, value, tooltipContent]);
 
 
@@ -172,30 +188,74 @@
                   resizeChart()
                 }
 
+                //Filters By Continent
                 document.getElementById('filterSouthAmerica').addEventListener('click', function () {
                   selectedContinent = 'South America';
-                  applyFilters();
+                  applyFilters('Continent');
                 });
                 document.getElementById('filterNorthAmerica').addEventListener('click', function () {
                   selectedContinent = 'North America';
-                  applyFilters();
+                  applyFilters('Continent');
                 });
                 document.getElementById('filterEurope').addEventListener('click', function () {
                   selectedContinent = 'Europe';
-                  applyFilters();
+                  applyFilters('Continent');
                 });
                 document.getElementById('filterAsia').addEventListener('click', function () {
                   selectedContinent = 'Asia';
-                  applyFilters();
+                  applyFilters('Continent');
                 });
                 document.getElementById('filterAfrica').addEventListener('click', function () {
                   selectedContinent = 'Africa';
-                  applyFilters();
-                });document.getElementById('filterOceania').addEventListener('click', function () {
+                  applyFilters('Continent');
+                });
+                document.getElementById('filterOceania').addEventListener('click', function () {
                   selectedContinent = 'Oceania';
-                  applyFilters();
+                  applyFilters('Continent');
                 });
 
+
+                //Filter by Languages
+                document.getElementById('filterEnglish').addEventListener('click', function () {
+                  selectedLanguage = 'English';
+                  applyFilters('Language');
+                });
+                document.getElementById('filterArabic').addEventListener('click', function () {
+                  selectedLanguage = 'Arabic';
+
+                  applyFilters('Language');
+                });
+                document.getElementById('filterFrench').addEventListener('click', function () {
+                  selectedLanguage = 'French';
+                  applyFilters('Language');
+                });
+                document.getElementById('filterPortuguese').addEventListener('click', function () {
+                  selectedLanguage = 'Portuguese';
+                  applyFilters('Language');
+                });
+                document.getElementById('filterSpanish').addEventListener('click', function () {
+                  selectedLanguage = 'Spanish';
+                  applyFilters('Language');
+                });
+
+
+                // Filter By Population
+                document.getElementById('filterOver10M').addEventListener('click', function () {
+                  selectedPopulation = 10000000;
+                  applyFilters('Population');
+                });
+                document.getElementById('filterOver50M').addEventListener('click', function () {
+                  selectedPopulation = 50000000;
+                  applyFilters('Population');
+                });
+                document.getElementById('filterOver100M').addEventListener('click', function () {
+                  selectedPopulation = 100000000;
+                  applyFilters('Population');
+                });
+                document.getElementById('filterOver200M').addEventListener('click', function () {
+                  selectedPopulation = 200000000;
+                  applyFilters('Population');
+                });
 
 
                 //Map customization
