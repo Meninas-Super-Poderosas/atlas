@@ -94,19 +94,4 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping("/create-user")
-    public String userForm(Model model) {
-        model.addAttribute("user", new User());
-        return "create-user";
-    }
-
-    @PostMapping("/create-user")
-    public String userSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        userService.createUser(user);
-
-        //return userService.createUser("result");
-        return "list-users";
-    }
-
 }

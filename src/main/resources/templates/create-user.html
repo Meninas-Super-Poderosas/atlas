@@ -70,7 +70,7 @@
                 <div class="title">Create a new User</div>
                 <div class="sales-details">
                      <form role="form"
-                           th:action="@{/users/create-user}" th:object="${user}" method="post">
+                           th:action="@{/admin/users/create}" th:object="${user}" method="post">
                         <div class="form-group">
                             <label for="email">Email address</label>
                             <input type="text" th:field="*{user.email}" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
