@@ -1,12 +1,22 @@
 package webapp.atlas.controller;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import webapp.atlas.model.Role;
 import webapp.atlas.model.User;
+import webapp.atlas.repository.UserRepository;
+import webapp.atlas.service.AuthService;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/")
@@ -22,12 +32,6 @@ public class HomeController {
     }
 
 
-//    @GetMapping("/tutorial")
-//    @Operation(summary = "Tutorial Page", description = "Returns the tutorial view.")
-//    public String tutorial(Model model) {
-//        return "tutorial";
-//    }
-
     @GetMapping("/login")
     @Operation(summary = "Login Page", description = "Returns the login page.")
     public String login(Model model) {
@@ -36,32 +40,51 @@ public class HomeController {
 
     @GetMapping("/admin/dashboard")
     public String adminDashboard(Model model) {
-        return "dashboard-admin";
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "dashboard-admin";
+        }
+
+        return "redirect:/";
     }
-//    @GetMapping("/admin/users")
-//    public String listUsers(Model model) {
-//        return "list-users";
-//    }
-//
-//    @GetMapping("/admin/users/create")
-//    public String createUsers(Model model) {
-//        return "create-user";
-//    }
 
     @GetMapping("/admin/posts")
-    public String listPosts(Model model){ return "list-posts";}
+    public String listPosts(Model model){
+
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "list-posts";
+        }
+        return "redirect:/";
+    }
 
     @GetMapping("/admin/posts/create")
-    public String createPosts(Model model){ return "create-post";}
+    public String createPosts(Model model){
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "create-post";
+        }
+        return "redirect:/";
+    }
 
     @GetMapping("/admin/filters")
-    public String listFilters(Model model){ return "list-filter";}
+    public String listFilters(Model model){
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "list-filter";
+        }
+        return "redirect:/";
+    }
 
     @GetMapping("/admin/roles")
-    public String listRoles(Model model){ return "list-role";}
+    public String listRoles(Model model){
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "list-role";
+        }
+        return "redirect:/";
+    }
 
-//    @GetMapping("/sign-up")
-//    public String signup(Model model){ return "sign-up";}
     @GetMapping("/sign-up")
     public String showSignupPage(Model model){
         User user = new User();
