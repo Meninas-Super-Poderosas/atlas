@@ -3,23 +3,47 @@ package webapp.atlas.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import webapp.atlas.model.Post;
+import webapp.atlas.model.User;
+import webapp.atlas.repository.PostRepository;
+import webapp.atlas.repository.UserRepository;
+import webapp.atlas.service.AuthService;
 import webapp.atlas.service.PostService;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/posts")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/save")
     @Operation(summary = "Create Post", description = "Create a brand new post")
-    public Post createPost(@RequestBody Post post){
-        return postService.createPost(post);
+    public String createPost(Post formPost, Model model){
+        Post post = new Post();
+        post.setTitle(formPost.getTitle());
+        post.setBody(formPost.getBody());
+        post.setLikes(0);
+        String username = authService.getCurrentUsername();
+        User user = userRepository.findByName(username).get();
+        post.setUser(user);
+        postRepository.save(post);
+
+        return "list-posts";
     }
 
     @GetMapping
