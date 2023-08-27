@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import webapp.atlas.model.Role;
 import webapp.atlas.model.User;
+import webapp.atlas.repository.RoleRepository;
 import webapp.atlas.repository.UserRepository;
 import webapp.atlas.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
@@ -38,11 +41,17 @@ public class UserController {
         user.setName(formUser.getName());
         user.setEmail(formUser.getEmail());
         user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-        Role role = new Role();
-        role.setName("ROLE_CLIENT");
-        user.getRoles().add(role);
-        userRepository.save(user);
-         return "redirect:/";
+        if (roleRepository.findByName("ROLE_CLIENT").isEmpty()) {
+            Role role = new Role();
+            role.setName("ROLE_CLIENT");
+            user.getRoles().add(role);
+            userRepository.save(user);
+        } else {
+            Role role = roleRepository.findByName("ROLE_CLIENT").get();
+            user.getRoles().add(role);
+            userRepository.save(user);
+        }
+        return "redirect:/";
     }
 
     // Get all users
