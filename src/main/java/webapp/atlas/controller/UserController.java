@@ -41,7 +41,7 @@ public class UserController {
 //        user.setRoles();
          userRepository.save(user);
 //         user.setRoles();
-         return "redirect:/posts";
+         return "redirect:/";
     }
 
     // Get all users
