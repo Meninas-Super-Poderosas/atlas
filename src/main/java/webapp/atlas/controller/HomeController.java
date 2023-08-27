@@ -1,14 +1,9 @@
 package webapp.atlas.controller;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Arrays;
-import java.util.List;
+import webapp.atlas.model.User;
 
 @Controller
 public class HomeController {
@@ -65,8 +60,12 @@ public class HomeController {
     @GetMapping("/admin/roles")
     public String listRoles(Model model){ return "list-role";}
 
+//    @GetMapping("/sign-up")
+//    public String signup(Model model){ return "sign-up";}
     @GetMapping("/sign-up")
-    public String signup(Model model){ return "sign-up";}
-
-
+    public String showSignupPage(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
+        return "sign-up";
+    }
 }

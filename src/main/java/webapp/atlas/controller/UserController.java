@@ -4,8 +4,12 @@ package webapp.atlas.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import webapp.atlas.model.Role;
 import webapp.atlas.model.User;
+import webapp.atlas.repository.RoleRepository;
+import webapp.atlas.repository.UserRepository;
 import webapp.atlas.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +24,34 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     // Create a new user
-    @PostMapping
+    @PostMapping("/save")
     @Operation(summary = "Create user", description = "Accepts request/JSON. Add a brand new user to the database.")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public String createUser(User formUser, Model model)
+    {
+        User user = new User();
+        user.setName(formUser.getName());
+        user.setEmail(formUser.getEmail());
+        user.setPassword(passwordEncoder.encode(formUser.getPassword()));
+        if (roleRepository.findByName("ROLE_CLIENT").isEmpty()) {
+            Role role = new Role();
+            role.setName("ROLE_CLIENT");
+            user.getRoles().add(role);
+            userRepository.save(user);
+        } else {
+            Role role = roleRepository.findByName("ROLE_CLIENT").get();
+            user.getRoles().add(role);
+            userRepository.save(user);
+        }
+        return "redirect:/";
     }
 
     // Get all users
