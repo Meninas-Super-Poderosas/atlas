@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import webapp.atlas.model.Post;
 import webapp.atlas.model.User;
+import webapp.atlas.repository.PostRepository;
 import webapp.atlas.repository.UserRepository;
 import webapp.atlas.service.AuthService;
+import webapp.atlas.service.PostService;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -20,6 +24,12 @@ public class HomeController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private PostService postService;
 
 
     @GetMapping("/")
@@ -56,6 +66,8 @@ public class HomeController {
 
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Post> posts = postService.getAllPosts();
+            model.addAttribute("posts", posts);
             return "list-posts";
         }
         return "redirect:/";

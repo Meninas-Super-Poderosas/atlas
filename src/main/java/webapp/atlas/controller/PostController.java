@@ -43,7 +43,7 @@ public class PostController {
         post.setUser(user);
         postRepository.save(post);
 
-        return "list-posts";
+        return "redirect:/admin/posts";
     }
 
     @GetMapping
