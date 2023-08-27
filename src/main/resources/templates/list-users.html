@@ -68,20 +68,21 @@
                 <div class="sales-details">
                     <ul class="details">
                         <li class="topic">Username</li>
-
+                        <li th:each="user : ${users}" th:text="${user.name}" ></li>
                     </ul>
                     <ul class="details">
                         <li class="topic">Email</li>
+                        <li th:each="user : ${users}" th:text="${user.email}" ></li>
 
                     </ul>
                     <ul class="details">
                         <li class="topic">Role</li>
-
+                        <li th:each="user : ${users}" th:text="ROLE_ADMIN" ></li>
                     </ul>
 
                 </div>
                 <div class="button">
-                    <a href="/users/create">Create</a>
+                    <a href="/admin/users/create">Create</a>
                 </div>
             </div>
         </div>
