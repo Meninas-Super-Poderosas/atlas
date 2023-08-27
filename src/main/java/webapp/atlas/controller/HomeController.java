@@ -1,4 +1,5 @@
 package webapp.atlas.controller;
+
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import webapp.atlas.model.Role;
+import webapp.atlas.model.Post;
 import webapp.atlas.model.User;
 import webapp.atlas.repository.UserRepository;
 import webapp.atlas.service.AuthService;
@@ -60,14 +61,17 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/admin/posts/create")
+    @GetMapping("/admin/posts/create-post")
     public String createPosts(Model model){
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            Post post = new Post();
+            model.addAttribute("post", post);
             return "create-post";
         }
         return "redirect:/";
     }
+
 
     @GetMapping("/admin/filters")
     public String listFilters(Model model){
