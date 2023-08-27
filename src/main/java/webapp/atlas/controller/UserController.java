@@ -38,10 +38,11 @@ public class UserController {
         user.setName(formUser.getName());
         user.setEmail(formUser.getEmail());
         user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-//        user.setRoles();
-         userRepository.save(user);
-//         user.setRoles();
-         return "redirect:/posts";
+        Role role = new Role();
+        role.setName("ROLE_CLIENT");
+        user.getRoles().add(role);
+        userRepository.save(user);
+         return "redirect:/";
     }
 
     // Get all users
