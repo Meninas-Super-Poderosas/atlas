@@ -3,9 +3,12 @@ package webapp.atlas.service;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webapp.atlas.repository.UserRepository;
+import webapp.atlas.model.Role;
 import webapp.atlas.model.User;
+import webapp.atlas.repository.RoleRepository;
+import webapp.atlas.repository.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     // Create a new user
     public User createUser(User user) {
@@ -54,6 +59,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public List<User> getUsersWithAdminRole() {
+        Optional<Role> adminRoleOptional = roleRepository.findByName("ROLE_ADMIN");
+
+        if (adminRoleOptional.isPresent()) {
+            Role adminRole = adminRoleOptional.get();
+            return userRepository.findByRolesContaining(adminRole);
+        }
+
+        return Collections.emptyList(); // No matching role found
+    }
 
     // Other business logic related to users
 }

@@ -67,18 +67,17 @@
                 <div class="title">Posts</div>
                 <div class="sales-details">
                     <ul class="details">
-                        <li class="topic">Username</li>
-
+                        <li class="topic">Author</li>
+                        <li th:each="post : ${posts}" th:text="${post.user.name}"></li>
                     </ul>
                     <ul class="details">
                         <li class="topic">Title</li>
-
+                        <li th:each="post : ${posts}" th:text="${post.title}"></li>
                     </ul>
                     <ul class="details">
                         <li class="topic">Body</li>
-
+                        <li th:each="post : ${posts}" th:text="${post.body}"></li>
                     </ul>
-
                 </div>
                 <div class="button">
                     <a href="/admin/posts/create-post">Create</a>
