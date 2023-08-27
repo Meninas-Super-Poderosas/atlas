@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import webapp.atlas.model.Role;
 import webapp.atlas.model.User;
 import webapp.atlas.repository.UserRepository;
@@ -81,6 +83,33 @@ public class HomeController {
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
             return "list-role";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/admin/users")
+    public String listUsers(Model model) {
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "list-users";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/admin/users/create")
+    public String createUsers(Model model) {
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "create-user";
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/admin/users/create")
+    public String userSubmit(@ModelAttribute User user, Model model) {
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            return "list-users";
         }
         return "redirect:/";
     }
