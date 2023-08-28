@@ -84,6 +84,16 @@
                         <li class="topic">Description</li>
                         <li th:each="post : ${posts}" th:text="${post.description}"></li>
                     </ul>
+                    <ul class="details">
+                        <li class="topic">Actions</li>
+                        <!-- Loop through users and add a delete button -->
+                        <li th:each="post : ${posts}">
+                            <form th:action="@{/posts/{id}(id=${post.id})}" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
                 <div class="button">
                     <a href="/admin/posts/create-post">Create</a>

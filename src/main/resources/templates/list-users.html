@@ -85,7 +85,16 @@
                         <li class="topic">Role</li>
                         <li th:each="user : ${users}" th:text="ROLE_ADMIN" ></li>
                     </ul>
-
+                    <ul class="details">
+                        <li class="topic">Actions</li>
+                        <!-- Loop through users and add a delete button -->
+                        <li th:each="user : ${users}">
+                            <form th:action="@{/users/{id}(id=${user.id})}" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
                 <div class="button">
                     <a href="/admin/users/create">Create</a>

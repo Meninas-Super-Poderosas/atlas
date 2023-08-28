@@ -86,8 +86,10 @@ public class PostController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Post", description = "Delete a specific post refereed by a specific id")
     @Parameter(name = "post id", required = true, description = "Id of the post that will be deleted")
-    public void deletePost(@PathVariable Long id){
-        postService.deletePost(id);
+    public String deletePost(@PathVariable Long id){
+        Optional<Post> post = postRepository.findById(id);
+        post.ifPresent(value -> postRepository.deleteById(value.getId()));
+        return "redirect:/admin/posts";
     }
 
 }
