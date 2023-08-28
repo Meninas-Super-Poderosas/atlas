@@ -40,6 +40,14 @@
         </div>
     </header>
 
+    <div class="w3-container w3-white">
+        <h2>Vote for a Country </h2>
+        <form th:action="@{/vote}" th:object="${country}" method="post">
+            <label for="countryName">Enter Country Name:</label>
+            <input type="text" id="countryName" th:field="*{name}" required>
+            <button type="submit"  class="btn btn-primary">Vote</button>
+        </form>
+    </div>
 
 
     <!-- First Photo Grid-->
