@@ -3,10 +3,7 @@ package webapp.atlas.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import webapp.atlas.model.Filter;
 import webapp.atlas.repository.FilterRepository;
@@ -20,6 +17,9 @@ public class FilterController {
     @Autowired
     public FilterService filterService;
 
+    @Autowired
+    public FilterRepository filterRepository;
+
     @PostMapping
     @Operation(summary = "Create Filter", description = "Accepts request/JSON. Add a new filter and store it in the database.")
     public Filter createFilter(Filter filter){
@@ -32,4 +32,14 @@ public class FilterController {
         return filterService.getAllFilters();
     }
 
+    @PostMapping("/apply-filter")
+    @ResponseBody
+    public void applyFilter(@RequestParam("filterType") String filterType) {
+
+
+        // Create and save a new filter
+        Filter filter = new Filter();
+        filter.setFilterType(filterType);
+        filterRepository.save(filter);
+    }
 }

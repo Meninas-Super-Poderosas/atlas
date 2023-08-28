@@ -32,6 +32,7 @@ public class SpringSecurityConfig {
                                 .requestMatchers("/sign-up").permitAll()
                                 .requestMatchers("/users/**").permitAll()
                                 .requestMatchers("/posts/**").permitAll()
+                                .requestMatchers("/filter/**").permitAll()
                                 .requestMatchers("/js/**", "/css/**").permitAll()
                                 .requestMatchers("/countries/create-all-countries2").permitAll()
                                 .anyRequest().authenticated()

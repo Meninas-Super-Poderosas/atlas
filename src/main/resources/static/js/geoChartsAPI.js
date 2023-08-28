@@ -94,6 +94,7 @@ google.charts.load('current', {
                             if (!selectedContinent || continents.includes(selectedContinent)) {
                                 value = 200;
                                 populationCount += population;
+
                             }
                         }else if (type === "Language") {
                             if (!selectedLanguage || languages.includes(selectedLanguage)) {
@@ -132,6 +133,17 @@ google.charts.load('current', {
                     console.log(populationCount);
 
                     resizeChart()
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/filter/apply-filter',
+                        data: { filterType: type },
+                        success: function () {
+                            // Do nothing on success
+                        },
+                        error: function () {
+                        }
+                    });
                 }
 
                 //Filters By Continent
