@@ -18,11 +18,12 @@ public @Data class Post {
     @Schema(description = "Post ID", accessMode = READ_ONLY)
     private long id;
 
-    //Referenciar pais
-//    @ManyToOne
-//    @JoinColumn(name= "country_id")
-//    @Schema(description = "Country id")
-//    private Country country;
+
+    @Schema(description = "flagUrl", nullable = false, type = "String")
+    private String flagUrl;
+
+    @Schema(description = "country", nullable = false, type = "String")
+    private String countryName;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,6 +36,10 @@ public @Data class Post {
     @Schema(description = "Post's title", nullable = true, type = "String")
     private String title;
 
+    @Schema(description = "Post's description", nullable = true, type = "Long String")
+    private String description;
+
+    @Column(columnDefinition = "TEXT", length = 512)
     @Schema(description = "Post's Content", nullable = true, type = "String")
     private String body;
 

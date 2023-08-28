@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atlas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/post-style.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {font-family: "Raleway", sans-serif}
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* This sets the height to 100% of the viewport height */
+        }
+    </style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+<img id="belt" src="" alt="">
+<div class="topnavbar">
+    <ul class="snip1143">
+        <li><a href="/" data-hover="Home">Home</a></li>
+        <li class="current" ><a href="/post" data-hover="Posts">Posts</a></li>
+        <li><a href="/login" data-hover="Login">Sign in</a></li>
+        <li><a href="/logout" data-hover="Logout">Sign up</a></li>
+    </ul>
+</div>
+
+<div class="center-content"> <!-- Apply the centering styles to this div -->
+    <div style="display: -ms-inline-flexbox" class="w3-third w3-container w3-margin-bottom">
+        <!-- Display post data dynamically using Thymeleaf expressions -->
+        <img id="responsive-img" th:src="@{${post.flagUrl}}" alt="" style="width:300%" class="w3-hover-opacity">
+
+        <div class="w3-container w3-white">
+            <p><b th:text="${post.title}"></b></p>
+            <hr>
+            <p th:text="${post.countryName}"></p>
+            <hr>
+            <p th:text="${post.description}"></p>
+            <hr>
+            <p th:text="${post.body}"> </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

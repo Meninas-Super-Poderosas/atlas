@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import webapp.atlas.model.Post;
 import webapp.atlas.model.Role;
@@ -53,11 +54,11 @@ public class HomeController {
         return "home"; //view
     }
 
-    @GetMapping("/post")
-    @Operation(summary = "Post Page", description = "Returns the ListPosts view.")
-    public String post(Model model) {
-        return "post";
-    }
+//    @GetMapping("/post")
+//    @Operation(summary = "Post Page", description = "Returns the ListPosts view.")
+//    public String post(Model model) {
+//        return "post";
+//    }
 
 
     @GetMapping("/login")
@@ -87,6 +88,24 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/post")
+    public String Posts(Model model){
+
+        List<Post> posts = postService.getAllPosts();
+        model.addAttribute("posts", posts);
+        return "post";
+
+    }
+
+    @GetMapping("/post/{id}")
+    public String showPost(Model model, @PathVariable Long id){
+        Post post = postRepository.findById(id).get();
+        model.addAttribute("post", post);
+        return "show-post";
+    }
+
+
 
     @GetMapping("/admin/posts/create-post")
     public String createPosts(Model model){
