@@ -73,12 +73,14 @@
                 <div class="title">Logs</div>
                 <div class="sales-details">
                     <ul class="details">
-                        <li class="topic">Username</li>
-
+                        <li class="topic">Created At</li>
+                        <li th:each="filter : ${filters}" th:text="${filter.createdAt}"></li>
                     </ul>
                     <ul class="details">
                         <li class="topic">Type</li>
+                        <li th:each="filter : ${filters}" th:text="${filter.filterType}"></li>
                     </ul>
+
                 </div>
             </div>
         </div>

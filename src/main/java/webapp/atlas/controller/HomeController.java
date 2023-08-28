@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import webapp.atlas.model.*;
 import webapp.atlas.repository.*;
-import webapp.atlas.service.AuthService;
-import webapp.atlas.service.CommentService;
-import webapp.atlas.service.PostService;
-import webapp.atlas.service.UserService;
+import webapp.atlas.service.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +49,9 @@ public class HomeController {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private FilterService filterService;
+
 
 
     @GetMapping("/")
@@ -77,6 +77,8 @@ public class HomeController {
     public String adminDashboard(Model model) {
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Filter> filters = filterService.getAllFilters();
+            model.addAttribute("filters", filters);
             return "dashboard-admin";
         }
 
@@ -165,6 +167,8 @@ public class HomeController {
     public String listFilters(Model model){
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Filter> filters = filterService.getAllFilters();
+            model.addAttribute("filters", filters);
             return "list-filter";
         }
         return "redirect:/";
