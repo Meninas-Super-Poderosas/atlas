@@ -31,29 +31,17 @@ public @Data class Country {
 //            "languages"
 //    })
 //
-//    //Referenciar post
-//    @OneToMany(mappedBy = "country")
-//    private Set<Post> posts;
+    //Referenciar post
 
 
-    @Schema(description = "Country name", type = "String")
+    @Schema(description = "count the votes" )
+    private int votes;
+
+    @Schema(description = "flag url" )
+    private String flagUrl;
+
+    @Schema(description = "Country name" )
     private String name;
-
-    @Schema(description = "Total population", type = "Integer")
-    private long population;
-
-    @Schema(description = "Main currency used in the country", type = "Integer")
-    private String currencies;
-
-    @Schema(description = "Country's flag emoji", type = "String")
-    private String flag;
-
-    @Schema(description = "Country's capital", type = "String")
-    private String capital;
-
-    @Schema(description = "Most spoken language", type = "String")
-    private String languages;
-
 
 
 }
