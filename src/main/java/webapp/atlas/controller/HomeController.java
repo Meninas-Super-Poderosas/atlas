@@ -111,8 +111,11 @@ public class HomeController {
 
     @GetMapping("/admin/roles")
     public String listRoles(Model model){
+
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Role> roles = roleRepository.findAll();
+            model.addAttribute("role", roles);
             return "list-role";
         }
         return "redirect:/";
