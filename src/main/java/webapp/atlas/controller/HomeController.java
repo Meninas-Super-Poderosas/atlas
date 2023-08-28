@@ -182,6 +182,17 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/admin/countries")
+    public String getCountries(Model model) {
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            List<Country> countries = countryRepository.findAllByOrderByVotesDesc();
+            model.addAttribute("countries", countries);
+            return "countries";
+        }
+        return "redirect:/";
+    }
+
     @GetMapping("/admin/users")
     public String listUsers(Model model) {
         boolean isAdmin = authService.isCurrentUserAdmin();
