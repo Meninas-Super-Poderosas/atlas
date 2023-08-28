@@ -35,6 +35,10 @@ public @Data class Post {
     @Schema(description = "Post's title", nullable = true, type = "String")
     private String title;
 
+    @Schema(description = "Post's description", nullable = true, type = "Long String")
+    private String description;
+
+    @Column(columnDefinition = "TEXT", length = 512)
     @Schema(description = "Post's Content", nullable = true, type = "String")
     private String body;
 

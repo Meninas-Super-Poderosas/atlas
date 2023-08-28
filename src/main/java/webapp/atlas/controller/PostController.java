@@ -37,6 +37,7 @@ public class PostController {
         Post post = new Post();
         post.setTitle(formPost.getTitle());
         post.setBody(formPost.getBody());
+        post.setDescription(formPost.getDescription());
         post.setLikes(0);
         String username = authService.getCurrentUsername();
         User user = userRepository.findByName(username).get();
