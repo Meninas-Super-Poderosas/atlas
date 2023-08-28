@@ -62,28 +62,23 @@
             <div class="form-right-decoration"></div>
             <div class="circle"></div>
             <div class="form-inner">
-                <h1>Comment Here</h1>
-                <textarea th:field="*{body}" placeholder="Message..." rows="5"></textarea>
+                <textarea th:field="*{body}" placeholder="Comment Here..." rows="5" maxlength="55"></textarea>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
     </div>
 </div>
 <div>
-    <div class="w3-row-padding">
-        <div style="display: -ms-inline-flexbox" class="w3-third w3-container w3-margin-bottom" th:each="comment : ${comments}">
-            <!-- Display post data dynamically using Thymeleaf expressions -->
-            <div class="w3-container w3-white">
-                <p><b th:text="${comment.body}"></b></p>
-                <hr>
-                <p th:text="${comment.user.name}"></p>
-                <hr>
-            </div>
+    <div class="w3-container w3-margin-bottom" th:each="comment : ${comments}">
+        <!-- Display post data dynamically using Thymeleaf expressions -->
+        <div class="w3-container w3-white">
+            <p><b th:text="${comment.body}"></b></p>
+            <hr>
+            <p th:text="${comment.user.name}"></p>
+            <hr>
         </div>
     </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
