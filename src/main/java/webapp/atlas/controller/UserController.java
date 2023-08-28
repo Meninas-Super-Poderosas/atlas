@@ -90,8 +90,17 @@ public class UserController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a specific user", description = "Delete a specific user refereed by a specific id")
     @Parameter(name = "user id", required = true, description = "Id of the user that will be updated")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
+    public String deleteUser(@PathVariable Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
 
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            user.getRoles().clear();
+            user.getPosts().clear();
+
+            userRepository.deleteById(id);
+        }
+        return "redirect:/admin/users";
+    }
 }

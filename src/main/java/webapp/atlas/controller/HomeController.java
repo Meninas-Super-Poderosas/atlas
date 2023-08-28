@@ -2,6 +2,7 @@ package webapp.atlas.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,20 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import webapp.atlas.model.Comment;
-import webapp.atlas.model.Post;
-import webapp.atlas.model.Role;
-import webapp.atlas.model.User;
-import webapp.atlas.repository.CommentRepository;
-import webapp.atlas.repository.PostRepository;
-import webapp.atlas.repository.RoleRepository;
-import webapp.atlas.repository.UserRepository;
-import webapp.atlas.service.AuthService;
-import webapp.atlas.service.CommentService;
-import webapp.atlas.service.PostService;
-import webapp.atlas.service.UserService;
+import webapp.atlas.model.*;
+import webapp.atlas.repository.*;
+import webapp.atlas.service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -53,7 +46,11 @@ public class HomeController {
 
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private CountryRepository countryRepository;
 
+    @Autowired
+    private FilterService filterService;
 
 
 
@@ -80,6 +77,8 @@ public class HomeController {
     public String adminDashboard(Model model) {
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Filter> filters = filterService.getAllFilters();
+            model.addAttribute("filters", filters);
             return "dashboard-admin";
         }
 
@@ -102,6 +101,8 @@ public class HomeController {
     public String Posts(Model model){
 
         List<Post> posts = postService.getAllPosts();
+        Country country = new Country();
+        model.addAttribute("country", country);
         model.addAttribute("posts", posts);
         return "post";
 
@@ -131,6 +132,23 @@ public class HomeController {
         return "redirect:/post/" + id;
     }
 
+    @PostMapping("/vote")
+    public String vote(@ModelAttribute Country country, Model model){
+        Optional<Country> optionalCountry = countryRepository.findByName(country.getName());
+        if (optionalCountry.isPresent()) {
+            Country foundCountry = optionalCountry.get();
+            foundCountry.setVotes(foundCountry.getVotes() + 1);
+            countryRepository.save(foundCountry);
+        } else {
+            Country newCountry = new Country();
+            newCountry.setName(country.getName());
+            newCountry.setVotes(1);
+            countryRepository.save(newCountry);
+        }
+
+        return "redirect:/post";
+    }
+
 
 
     @GetMapping("/admin/posts/create-post")
@@ -149,6 +167,8 @@ public class HomeController {
     public String listFilters(Model model){
         boolean isAdmin = authService.isCurrentUserAdmin();
         if(isAdmin) {
+            List<Filter> filters = filterService.getAllFilters();
+            model.addAttribute("filters", filters);
             return "list-filter";
         }
         return "redirect:/";
@@ -162,6 +182,17 @@ public class HomeController {
             List<Role> roles = roleRepository.findAll();
             model.addAttribute("role", roles);
             return "list-role";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/admin/countries")
+    public String getCountries(Model model) {
+        boolean isAdmin = authService.isCurrentUserAdmin();
+        if(isAdmin) {
+            List<Country> countries = countryRepository.findAllByOrderByVotesDesc();
+            model.addAttribute("countries", countries);
+            return "countries";
         }
         return "redirect:/";
     }
@@ -222,4 +253,5 @@ public class HomeController {
         model.addAttribute("user", user);
         return "sign-up";
     }
+
 }

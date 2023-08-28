@@ -46,6 +46,12 @@
                 <span class="links_name">Posts</span>
             </a>
         </li>
+        <li>
+            <a href="/admin/countries">
+                <i class='bx bxs-map' ></i>
+                <span class="links_name">Countries</span>
+            </a>
+        </li>
         <li class="log_out">
             <a href="/logout">
                 <i class='bx bx-log-out'></i>
@@ -67,21 +73,14 @@
                 <div class="title">Recent filters</div>
                 <div class="sales-details">
                     <ul class="details">
-                        <li class="topic">Date</li>
-
+                        <li class="topic">Created At</li>
+                        <li th:each="filter : ${filters}" th:text="${filter.createdAt}"></li>
                     </ul>
                     <ul class="details">
                         <li class="topic">Type</li>
-
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Username</li>
-
+                        <li th:each="filter : ${filters}" th:text="${filter.filterType}"></li>
                     </ul>
 
-                </div>
-                <div class="button">
-                    <a href="#">See All</a>
                 </div>
             </div>
         </div>

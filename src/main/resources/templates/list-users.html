@@ -46,6 +46,12 @@
                 <span class="links_name">Posts</span>
             </a>
         </li>
+        <li>
+            <a href="/admin/countries">
+                <i class='bx bxs-map' ></i>
+                <span class="links_name">Countries</span>
+            </a>
+        </li>
         <li class="log_out">
             <a href="/logout">
                 <i class='bx bx-log-out'></i>
@@ -79,7 +85,16 @@
                         <li class="topic">Role</li>
                         <li th:each="user : ${users}" th:text="ROLE_ADMIN" ></li>
                     </ul>
-
+                    <ul class="details">
+                        <li class="topic">Actions</li>
+                        <!-- Loop through users and add a delete button -->
+                        <li th:each="user : ${users}">
+                            <form th:action="@{/users/{id}(id=${user.id})}" method="POST">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
                 <div class="button">
                     <a href="/admin/users/create">Create</a>

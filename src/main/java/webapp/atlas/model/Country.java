@@ -37,9 +37,6 @@ public @Data class Country {
     @Schema(description = "count the votes" )
     private int votes;
 
-    @Schema(description = "flag url" )
-    private String flagUrl;
-
     @Schema(description = "Country name" )
     private String name;
 
