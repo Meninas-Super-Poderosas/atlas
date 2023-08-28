@@ -91,6 +91,7 @@
                                     name="title"
                                     placeholder="Enter title"
                                     th:field="*{title}"
+                                    maxlength="50"
                                     type="text"
                             />
 
@@ -103,6 +104,7 @@
                                    name="body"
                                    placeholder="Enter Body"
                                    th:field="*{body}"
+                                   maxlength="255"
                                    type="text">
                         </div>
 
@@ -113,6 +115,7 @@
                                    name="description"
                                    placeholder="Enter description"
                                    th:field="*{description}"
+                                   maxlength="100"
                                    type="text">
                         </div>
 
@@ -123,6 +126,7 @@
                                    name="flagUrl"
                                    placeholder="Enter the flag url"
                                    th:field="*{flagUrl}"
+                                   maxlength="255"
                                    type="text">
                         </div>
 
@@ -133,6 +137,7 @@
                                    name="countryName"
                                    placeholder="Enter Country name"
                                    th:field="*{countryName}"
+                                   maxlength="100"
                                    type="text">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
